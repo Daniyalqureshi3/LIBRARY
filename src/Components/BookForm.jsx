@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect,useState } from "react";
 import { uselibrary } from "../context/LibraryContext";
 
 function BookForm() {
@@ -10,7 +10,7 @@ function BookForm() {
   const [description, setDescription] = useState("");
   const [quantity, setQuantity] = useState(1);
 
-  const { dispatch } = uselibrary();
+  const { state, dispatch } = uselibrary();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -26,10 +26,26 @@ function BookForm() {
       quantity,
     };
 
-    dispatch({
-      type: "ADD_BOOK",
-      payload: newBook,
-    });
+    if (state.editBook) {
+  dispatch({
+    type: "UPDATE_BOOK",
+    payload: {
+      id: state.editBook.id,
+      title,
+      author,
+      category,
+      price,
+      quantity,
+      availability,
+      description,
+    },
+  });
+} else {
+  dispatch({
+    type: "ADD_BOOK",
+    payload: newBook,
+  });
+}
 
     settitle("");
     setAuthor("");
@@ -38,7 +54,20 @@ function BookForm() {
     setDescription("");
     setQuantity(1);
     setAvailability("Available");
+
   };
+  useEffect(() => {
+  if (state.editBook) {
+     console.log("editBook:", state.editBook);
+    settitle(state.editBook.title);
+    setAuthor(state.editBook.author);
+    setCategory(state.editBook.category);
+    setPrice(state.editBook.price);
+    setQuantity(state.editBook.quantity);
+    setAvailability(state.editBook.availability);
+    setDescription(state.editBook.description);
+  }
+}, [state.editBook]);
 
   return (
     <div>
@@ -99,7 +128,9 @@ function BookForm() {
           onChange={(e) => setDescription(e.target.value)}
         />
 
-        <button type="submit">Add Book</button>
+        <button type="submit">
+  {state.editBook ? "Update Book" : "Add Book"}
+</button>
       </form>
     </div>
   );

@@ -18,12 +18,6 @@ const reducer = (state, action) => {
         books: [...state.books, action.payload],
       };
 
-    case "DELETE_BOOK":
-      return {
-        ...state,
-        books: state.books.filter((book) => book.id !== action.payload),
-      };
-
     case "EDIT_BOOK":
       return {
         ...state,

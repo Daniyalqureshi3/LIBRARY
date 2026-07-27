@@ -4,9 +4,18 @@ import { uselibrary } from "../context/LibraryContext";
 function BookList() {
   const { state, dispatch } = uselibrary();
 
+  const filteredBooks = state.books.filter((book) => {
+    const search = state.search.toLowerCase();
+
+    return (
+      book.title.toLowerCase().includes(search) ||
+      book.author.toLowerCase().includes(search)
+    );
+  });
+
   return (
     <div>
-      {state.books.map((book) => (
+      {filteredBooks.map((book) => (
         <div key={book.id}>
           <h2>{book.title}</h2>
           <h3>{book.author}</h3>
@@ -17,8 +26,16 @@ function BookList() {
           <h4>Price: {book.price}</h4>
 
           <div className="ad-div">
-
-
+            <button
+              onClick={() =>
+                dispatch({
+                  type: "EDIT_BOOK",
+                  payload: book,
+                })
+              }
+            >
+              Edit
+            </button>
           </div>
         </div>
       ))}
