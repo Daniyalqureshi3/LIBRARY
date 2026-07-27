@@ -1,0 +1,108 @@
+import React, { useState } from "react";
+import { uselibrary } from "../context/LibraryContext";
+
+function BookForm() {
+  const [title, settitle] = useState("");
+  const [author, setAuthor] = useState("");
+  const [category, setCategory] = useState("");
+  const [price, setPrice] = useState("");
+  const [availability, setAvailability] = useState("Available");
+  const [description, setDescription] = useState("");
+  const [quantity, setQuantity] = useState(1);
+
+  const { dispatch } = uselibrary();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const newBook = {
+      id: Date.now(),
+      title,
+      author,
+      category,
+      price,
+      description,
+      availability,
+      quantity,
+    };
+
+    dispatch({
+      type: "ADD_BOOK",
+      payload: newBook,
+    });
+
+    settitle("");
+    setAuthor("");
+    setCategory("");
+    setPrice("");
+    setDescription("");
+    setQuantity(1);
+    setAvailability("Available");
+  };
+
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={title}
+          placeholder="Enter Book Name"
+          onChange={(e) => settitle(e.target.value)}
+        />
+
+        <input
+          type="text"
+          value={author}
+          placeholder="Enter Author Name"
+          onChange={(e) => setAuthor(e.target.value)}
+        />
+
+        <select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+        >
+          <option value="">Select Category</option>
+          <option value="Science">Science</option>
+          <option value="History">History</option>
+          <option value="Novel">Novel</option>
+          <option value="Business">Business</option>
+          <option value="Islamic">Islamic</option>
+          <option value="Biography">Biography</option>
+          <option value="Other">Other</option>
+        </select>
+
+        <input
+          type="number"
+          value={price}
+          placeholder="Enter Price"
+          onChange={(e) => setPrice(e.target.value)}
+        />
+
+        <input
+          type="number"
+          value={quantity}
+          placeholder="Enter Quantity"
+          onChange={(e) => setQuantity(e.target.value)}
+        />
+
+        <select
+          value={availability}
+          onChange={(e) => setAvailability(e.target.value)}
+        >
+          <option value="Available">Available</option>
+          <option value="Not Available">Not Available</option>
+        </select>
+
+        <textarea
+          value={description}
+          placeholder="Enter Book Description"
+          onChange={(e) => setDescription(e.target.value)}
+        />
+
+        <button type="submit">Add Book</button>
+      </form>
+    </div>
+  );
+}
+
+export default BookForm;
