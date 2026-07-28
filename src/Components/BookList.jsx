@@ -63,6 +63,7 @@ if (state.selectedCategory !== "ALL") {
           <div className="ad-div">
             <button
               onClick={() =>
+                
                 dispatch({
                   type: "EDIT_BOOK",
                   payload: book,
@@ -71,6 +72,20 @@ if (state.selectedCategory !== "ALL") {
             >
               Edit
             </button>
+            <div className="taken">
+ <button
+ disabled={Number(book.quantity) <= 0}
+  onClick={() => {
+
+    dispatch({
+      type: "BORROW_BOOK",
+      payload: book.id,
+    });
+  }}
+>
+  Borrow
+</button>
+            </div>
           </div>
         </div>
       ))}

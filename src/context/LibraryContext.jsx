@@ -33,17 +33,6 @@ const reducer = (state, action) => {
         ),
         editBook: null,
       };
-
-    case "BORROW_BOOK":
-      return {
-        ...state,
-        books: state.books.map((book) =>
-          book.id === action.payload
-            ? { ...book, availability: "Borrowed" }
-            : book
-        ),
-      };
-
     case "RETURN_BOOK":
       return {
         ...state,
@@ -88,10 +77,12 @@ const reducer = (state, action) => {
        selectedCategory: action.payload,
   };
   case "BORROW_BOOK":
+    
   return {
     ...state,
     books: state.books.map((book) => {
       if (book.id === action.payload) {
+          console.log("Before:", book.quantity);
         const newQuantity = Number(book.quantity) - 1;
 
         return {
