@@ -4,6 +4,9 @@ import { LibraryProvider } from './context/LibraryContext'
 import BookForm from './Components/BookForm'
 import BookList from './Components/BookList'
 import Search from './Components/Search'
+import Filter from './Components/Filter'
+import Sort from './Components/Sort'
+import CategoryList from './Components/CategoryList'
 
 function App() {
 
@@ -12,7 +15,10 @@ function App() {
     <>
      <LibraryProvider>
       <BookForm/>
+      <Filter/>
+      <Sort/>
       <Search/>
+      <CategoryList/>
       <BookList/>
      </LibraryProvider>
     </>

@@ -92,6 +92,7 @@ function BookForm() {
         >
           <option value="">Select Category</option>
           <option value="Science">Science</option>
+          <option value="Programming">Programming</option>
           <option value="History">History</option>
           <option value="Novel">Novel</option>
           <option value="Business">Business</option>

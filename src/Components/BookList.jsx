@@ -4,7 +4,7 @@ import { uselibrary } from "../context/LibraryContext";
 function BookList() {
   const { state, dispatch } = uselibrary();
 
-  const filteredBooks = state.books.filter((book) => {
+  let filteredBooks = state.books.filter((book) => {
     const search = state.search.toLowerCase();
 
     return (
@@ -12,6 +12,41 @@ function BookList() {
       book.author.toLowerCase().includes(search)
     );
   });
+
+  if (state.filter === "Available") {
+  filteredBooks = filteredBooks.filter(
+    (book) => book.availability === "Available"
+  );
+}
+
+if (state.filter === "Borrowed") {
+  filteredBooks = filteredBooks.filter(
+    (book) => book.availability === "Borrowed"
+  );
+}
+
+if (state.filter === "Favourite") {
+  filteredBooks = filteredBooks.filter(
+    (book) => book.favourite
+  );
+}
+
+if (state.sort === "A-Z") {
+  filteredBooks.sort((a, b) => a.title.localeCompare(b.title));
+}
+
+if (state.sort === "Z-A") {
+  filteredBooks.sort((a, b) => b.title.localeCompare(a.title));
+}
+
+if (state.sort === "AUTHOR") {
+  filteredBooks.sort((a, b) => a.author.localeCompare(b.author));
+}
+if (state.selectedCategory !== "ALL") {
+  filteredBooks = filteredBooks.filter(
+    (book) => book.category === state.selectedCategory
+  );
+}
 
   return (
     <div>

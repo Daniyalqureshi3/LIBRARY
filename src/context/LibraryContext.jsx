@@ -8,6 +8,7 @@ const initialState = {
   filter: "ALL",
   sort: "A-Z",
   editBook: null,
+  selectedCategory: "ALL",
 };
 
 const reducer = (state, action) => {
@@ -80,6 +81,29 @@ const reducer = (state, action) => {
         ...state,
         sort: action.payload,
       };
+
+      case "SET_CATEGORY":
+      return {
+        ...state,
+       selectedCategory: action.payload,
+  };
+  case "BORROW_BOOK":
+  return {
+    ...state,
+    books: state.books.map((book) => {
+      if (book.id === action.payload) {
+        const newQuantity = Number(book.quantity) - 1;
+
+        return {
+          ...book,
+          quantity: newQuantity,
+          availability: newQuantity <= 0 ? "Not Available" : "Borrowed",
+        };
+      }
+
+      return book;
+    }),
+  };
 
     default:
       return state;
