@@ -1,7 +1,8 @@
 import React, { useEffect,useState } from "react";
 import { uselibrary } from "../context/LibraryContext";
-
+import { useNavigate } from "react-router-dom";
 function BookForm() {
+  const navigate = useNavigate();
   const [title, settitle] = useState("");
   const [author, setAuthor] = useState("");
   const [category, setCategory] = useState("");
@@ -42,12 +43,14 @@ function BookForm() {
       description,
     },
   });
-} else {
+} 
+else {
   dispatch({
     type: "ADD_BOOK",
     payload: newBook,
   });
 }
+navigate("/");
 
     settitle("");
     setAuthor("");
@@ -60,7 +63,7 @@ function BookForm() {
   };
   useEffect(() => {
   if (state.editBook) {
-     console.log("editBook:", state.editBook);
+
     settitle(state.editBook.title);
     setAuthor(state.editBook.author);
     setCategory(state.editBook.category);
@@ -135,7 +138,9 @@ function BookForm() {
   {state.editBook ? "Update Book" : "Add Book"}
 </button>
       </form>
+
     </div>
+    
   );
 }
 

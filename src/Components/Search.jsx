@@ -9,7 +9,7 @@ function Search() {
           <div>
       <input
         type="text"
-        placeholder="Search by Title, Author or ISBN"
+        placeholder="Search by Title, Author or"
         onChange={(e) =>
           dispatch({
             type: "SET_SEARCH",

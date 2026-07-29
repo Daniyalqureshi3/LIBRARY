@@ -1,5 +1,6 @@
 import React from 'react'
 import { uselibrary } from '../context/LibraryContext'
+import "./Dashboard.css"
 
 function Dashboard() {
     const {state} =uselibrary();
@@ -19,18 +20,34 @@ const FAavoritebook = state.books.filter(
 
 const catogiry = new Set(state.books.map((book) => book.category)).size
   return (
-    <div>
-      <h2>Dshboard</h2>
-          <div>
-      
-      <h5>total Books is: {totalBooks}</h5>
-      <h3>Available Book is: {availableBooks}</h3>
-      <h4>you borowed is: {BorrowBook}</h4>
-      <h6>Favorite❤️ {FAavoritebook}</h6>
-      <h3>types of books: {catogiry}</h3>
+<div className="dashboard">
 
-    </div>
-    </div>
+  <div className="card">
+    <h3>Total Books</h3>
+    <h2>{totalBooks}</h2>
+  </div>
+
+  <div className="card">
+    <h3>Available Books</h3>
+    <h2>{availableBooks}</h2>
+  </div>
+
+  <div className="card">
+    <h3>Borrowed Books</h3>
+    <h2>{BorrowBook}</h2>
+  </div>
+
+  <div className="card">
+    <h3>Favourite Books ❤️</h3>
+    <h2>{FAavoritebook}</h2>
+  </div>
+
+  <div className="card">
+    <h3>Categories</h3>
+    <h2>{catogiry}</h2>
+  </div>
+
+</div>
   )
 }
 
