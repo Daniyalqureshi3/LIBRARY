@@ -33,16 +33,27 @@ const reducer = (state, action) => {
         ),
         editBook: null,
       };
-    case "RETURN_BOOK":
-      return {
-        ...state,
-        books: state.books.map((book) =>
-          book.id === action.payload
-            ? { ...book, availability: "Available" }
-            : book
-        ),
-      };
+case "RETURN_BOOK":
+  return {
+    ...state,
+    books: state.books.map((book) => {
+      if (book.id === action.payload) {
 
+        if (book.borrowed <= 0) return book;
+
+        const newQuantity = book.quantity + 1;
+
+        return {
+          ...book,
+          quantity: newQuantity,
+          borrowed: book.borrowed - 1,
+          availability: "Available",
+        };
+      }
+
+      return book;
+    }),
+  };
     case "TOGGLE_FAVOURITE":
       return {
         ...state,
@@ -76,19 +87,22 @@ const reducer = (state, action) => {
         ...state,
        selectedCategory: action.payload,
   };
-  case "BORROW_BOOK":
-    
+case "BORROW_BOOK":
   return {
     ...state,
     books: state.books.map((book) => {
       if (book.id === action.payload) {
-          console.log("Before:", book.quantity);
-        const newQuantity = Number(book.quantity) - 1;
+
+        if (book.quantity <= 0) return book;
+
+        const newQuantity = book.quantity - 1;
 
         return {
           ...book,
           quantity: newQuantity,
-          availability: newQuantity <= 0 ? "Not Available" : "Borrowed",
+          borrowed: book.borrowed + 1,
+          availability:
+            newQuantity === 0 ? "Not Available" : "Borrowed",
         };
       }
 

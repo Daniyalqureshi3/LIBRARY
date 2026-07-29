@@ -23,7 +23,9 @@ function BookForm() {
       price,
       description,
       availability,
-      quantity,
+   quantity: Number(quantity),
+  borrowed: 0,
+  favourite: false,
     };
 
     if (state.editBook) {

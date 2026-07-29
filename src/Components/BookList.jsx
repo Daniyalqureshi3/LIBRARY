@@ -47,6 +47,11 @@ if (state.selectedCategory !== "ALL") {
     (book) => book.category === state.selectedCategory
   );
 }
+if (state.filter === "Favourite") {
+  filteredBooks = filteredBooks.filter(
+    (book) => book.favourite
+  );
+}
 
   return (
     <div>
@@ -59,7 +64,7 @@ if (state.selectedCategory !== "ALL") {
           <h4>{book.availability}</h4>
           <h4>Quantity: {book.quantity}</h4>
           <h4>Price: {book.price}</h4>
-
+<h4>Borrowed: {book.borrowed}</h4>
           <div className="ad-div">
             <button
               onClick={() =>
@@ -84,6 +89,29 @@ if (state.selectedCategory !== "ALL") {
   }}
 >
   Borrow
+</button>
+<button
+disabled={book.borrowed <= 0}
+  onClick={() =>
+    dispatch({
+      type: "RETURN_BOOK",
+      payload: book.id,
+    })
+  }
+>
+  Return
+</button>
+            </div>
+            <div className="fav">
+              <button
+  onClick={() =>
+    dispatch({
+      type: "TOGGLE_FAVOURITE",
+      payload: book.id,
+    })
+  }
+>
+  {book.favourite ? "Favorite❤️" : "add to favorite"}
 </button>
             </div>
           </div>

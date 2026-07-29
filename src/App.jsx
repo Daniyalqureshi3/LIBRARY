@@ -7,6 +7,7 @@ import Search from './Components/Search'
 import Filter from './Components/Filter'
 import Sort from './Components/Sort'
 import CategoryList from './Components/CategoryList'
+import Dashboard from './Components/Dashboard'
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
   return (
     <>
      <LibraryProvider>
+      <Dashboard/>
       <BookForm/>
       <Filter/>
       <Sort/>
