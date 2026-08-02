@@ -1,0 +1,45 @@
+.back-container{
+    width: 90%;
+    max-width: 1200px;
+    margin: 30px auto 0;
+}
+
+.back-btn{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 12px 22px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #2563EB;
+    color: #fff;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: .3s ease;
+}
+
+.back-btn:hover{
+    background: #1D4ED8;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(37,99,235,.25);
+}
+
+.back-btn:active{
+    transform: scale(.97);
+}
+.back-btn{
+    background:#fff;
+    color:#2563EB;
+    border:1px solid #2563EB;
+}
+
+.back-btn:hover{
+    background:#2563EB;
+    color:#fff;
+}

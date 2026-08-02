@@ -1,6 +1,7 @@
 import React, { useEffect,useState } from "react";
 import { uselibrary } from "../context/LibraryContext";
 import { useNavigate } from "react-router-dom";
+import "./Bookform.css"
 function BookForm() {
   const navigate = useNavigate();
   const [title, settitle] = useState("");
@@ -75,8 +76,8 @@ navigate("/");
 }, [state.editBook]);
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className="form-container">
+      <form className="book-form" onSubmit={handleSubmit}>
         <input
           type="text"
           value={title}
